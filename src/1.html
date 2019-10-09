@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="demo1">
+    <my-input></my-input>
+</div>
+<script>
+    var myInput = {
+        template:`<div><input type="button" @click="subClick()"  value="-" >
+                    <input type="text" @input="handleInput"  v-model="num" style="width: 20px;">
+                    <input type="button" @click="addClick()" value="+" ></div>`,
+        data(){
+            return {
+                num:1
+            }
+        },
+        methods:{
+            handleInput(){
+                let reg = /^[1-9][0-9]*$/;
+                if (!reg.test(this.num)) {
+                    confirm("输入数据不合法")
+                    setTimeout(() => {
+                        this.num = 1;
+                }, 0)
+                }
+            },
+            subClick(){
+                if(this.num>1){
+                    this.num--;
+                }else {
+                    window.alert("数量为1，不能再减");
+                }
+            },
+            addClick(){
+                this.num++;
+            }
+        }
+    }
+    new Vue({
+        el:'#demo1',
+        components:{
+            'my-input':myInput
+        }
+    })
+</script>
+</body>
+</html>

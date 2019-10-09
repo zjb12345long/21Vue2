@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <demo-table :info="tbinfo1" :cls="tbclass1" ></demo-table>
+    <demo-table :info="tbinfo2" :cls="tbclass2" ></demo-table>
+</div>
+<script>
+    var DemoTable = {
+        template:`<div>
+                      <table border='1' cellspacing="0" cellpadding="0" :class="cls">
+                          <thead>
+                              <tr>
+                              <th v-for='(itemtitle,index) in info[0]'>
+                                  {{index}}
+                              </th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr v-for='(item,index) in info' :key='index'>
+                                  <td v-for='(childitem,index) in item' :key='index'>
+                                  {{childitem}}
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </table>
+                   </div>
+        `,
+        props:['info','cls']
+    }
+    new Vue({
+        el:'#app',
+        data(){
+            return {
+                tbclass1: 'demoTbBlue',
+                tbclass2: 'demoTbWood',
+                tbinfo1: [{name: '张三', age: 16, gender: 'male'},
+                    {name: '李四', age: 18, gender: 'male'},
+                    {name: '王五', age: 17, gender: 'female'},
+                    {name: '赵六', age: 18, gender: 'male'}],
+                tbinfo2: [{课程: '大学语文', 成绩: 84,},
+                    {课程: '英语', 成绩: 68,},
+                    {课程: '高数', 成绩: 95,},]
+            }
+        },
+        components:{DemoTable}
+    })
+</script>
+</body>
+</html>

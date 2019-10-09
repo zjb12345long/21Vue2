@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<style>
+    input{width:100px;height:35px;border:1px solid #333bff}
+    .over{background: white}
+    .out{background: #333bff;color: #ffffff}
+</style>
+<body>
+<div id="demo">
+    <my-button style="text-align: center;"></my-button>
+</div>
+<script>
+    var myButton = {
+        template:`<div ><input  type="submit" v-on:mouseover="show" v-on:mouseout="change" :class="isActive"  :value="wen" @click="btClick()" ></div>`,
+        data(){
+            return {
+                isActive:{
+                    over:true,
+                    out:false
+                },
+               wen:"可帅了",
+            }
+        },
+        methods:{
+            btClick(){
+                alert(this.wen)
+            },
+            show(){
+                this.isActive.over=!this.isActive.over;
+                this.isActive.out=!this.isActive.out;
+            },
+            change(){
+                this.isActive.over=!this.isActive.over;
+                this.isActive.out=!this.isActive.out;
+            }
+        }
+    }
+    new Vue({
+        el:'#demo',
+        components:{
+            'my-button':myButton
+        }
+    })
+</script>
+</body>
+</html>
